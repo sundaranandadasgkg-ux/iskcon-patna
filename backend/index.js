@@ -26,6 +26,7 @@ const allowedOrigins = [
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
+            console.log("Origin:", origin);
             return callback(null, true);
         }
         return callback(new Error('Blocked by CORS Configuration'));
