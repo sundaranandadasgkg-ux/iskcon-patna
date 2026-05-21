@@ -74,22 +74,16 @@ mongoose.connect(mongoURI)
 
 
 
-// Static files pehle load karo
+// 1. Static files serve karo
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Niche wala code add karo jo bina error ke kaam karega
+// 2. Sirf tabhi serve karo jab koi aur route match na hua ho
 app.use((req, res, next) => {
-    // Agar request '/api' se shuru nahi ho rahi hai, toh index.html bhejo
     if (!req.path.startsWith('/api')) {
         res.sendFile(path.join(__dirname, 'public', 'index.html'));
     } else {
-        // Agar API route hai aur match nahi hua, toh 404 bhejo
         next();
     }
-});
-
-app.get('.*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // 🚀 5. Port Listener Setup
