@@ -2,6 +2,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser'); // Isse import karo
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -77,7 +78,7 @@ mongoose.connect(mongoURI)
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname__, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // 🚀 5. Port Listener Setup
