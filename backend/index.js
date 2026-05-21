@@ -71,6 +71,15 @@ mongoose.connect(mongoURI)
       console.error("❌ Database Connection Error: ", err.message);
   });
 
+
+
+  // last. Static Files & Catch-all Route (Sabse niche, routes ke baad)
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname__, 'public', 'index.html'));
+});
+
 // 🚀 5. Port Listener Setup
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {
