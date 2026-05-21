@@ -74,14 +74,18 @@ mongoose.connect(mongoURI)
 
 
 
-// Catch-all route (Sahi Syntax)
-app.get('*', (req, res, next) => {
-    // Agar request '/api' se shuru ho rahi hai, toh 404 return karo (API route nahi mila)
-    if (req.path.startsWith('/api')) {
-        return res.status(404).json({ msg: "API endpoint not found" });
+// Static files pehle load karo
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Niche wala code add karo jo bina error ke kaam karega
+app.use((req, res, next) => {
+    // Agar request '/api' se shuru nahi ho rahi hai, toh index.html bhejo
+    if (!req.path.startsWith('/api')) {
+        res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    } else {
+        // Agar API route hai aur match nahi hua, toh 404 bhejo
+        next();
     }
-    // Warna React ki index.html file bhej do
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('.*', (req, res) => {
