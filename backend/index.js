@@ -52,10 +52,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Base Route for Testing
-app.get('/', (req, res) => {
-    res.send("Radhe Radhe! ISKCON Patna Meeting Central Engine is Running Clean...");
-});
 
 // 🔌 3. Routes Ko Express Ke Sath Connect/Register Kiya
 app.use('/api/users', userRoutes);     // 👈 Yeh line ab register ho gayi!
