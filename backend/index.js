@@ -25,8 +25,7 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            console.log("Origin:", origin);
+        if (!origin || origin === 'https://iskcon-patna.onrender.com' || origin === 'http://localhost:5173') {
             return callback(null, true);
         }
         return callback(new Error('Blocked by CORS Configuration'));
