@@ -79,6 +79,14 @@ router.post('/login', async (req, res) => {
         const payload = { id: user._id, role: user.role };
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
 
+        // 🔥 YAHAN COOKIE SET KIYA (Safari/Mobile ke liye zaroori)
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,       // HTTPS ke liye
+            sameSite: 'none',   // Cross-domain/Mobile ke liye
+            maxAge: 24 * 60 * 60 * 1000 // 24 ghante
+        });
+
         res.json({
             token,
             user: { id: user._id, name: user.name, email: user.email, role: user.role, department: user.department }

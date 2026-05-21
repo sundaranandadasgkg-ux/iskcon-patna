@@ -1,5 +1,6 @@
 // backend/index.js
 const express = require('express');
+const cookieParser = require('cookie-parser'); // Isse import karo
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
@@ -9,6 +10,8 @@ const userRoutes = require('./routes/userRoutes');
 const agendaRoutes = require('./routes/agendaRoutes');
 
 const app = express();
+
+app.use(cookieParser()); // Isse middleware mein use karo
 
 // Body Parser Middleware (JSON data read karne ke liye)
 app.use(express.json());
