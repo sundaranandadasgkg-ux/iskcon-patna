@@ -76,7 +76,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 2. Sirf tabhi serve karo jab koi aur route match na hua ho
 app.use((req, res, next) => {
     if (!req.path.startsWith('/api')) {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'));
+        res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
     } else {
         next();
     }
